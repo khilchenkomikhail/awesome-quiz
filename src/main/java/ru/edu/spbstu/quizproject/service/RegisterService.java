@@ -6,7 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.edu.spbstu.quizproject.config.JwtService;
-import ru.edu.spbstu.quizproject.dao.UserRepository;
+import ru.edu.spbstu.quizproject.user.UserRepository;
 import ru.edu.spbstu.quizproject.mail.EmailVerification;
 import ru.edu.spbstu.quizproject.mail.token.ConfirmationTokenService;
 import ru.edu.spbstu.quizproject.request.AuthenticationRequest;
@@ -26,13 +26,13 @@ public class RegisterService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        if (!emailVerification.checkEmail(request.getEmail())) {
+        if (!emailVerification.checkEmail(request.email())) {
             throw new RuntimeException("BadEmail");
         }
         User user = User.builder()
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .email(request.getEmail())
+                .username(request.username())
+                .password(passwordEncoder.encode(request.password()))
+                .email(request.email())
                 .userRole(UserRole.USER)
                 .build();
         user = userRepository.save(user);
@@ -48,11 +48,11 @@ public class RegisterService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
+                        request.username(),
+                        request.password()
                 )
         );
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(request.username()).orElseThrow();
 
         String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()

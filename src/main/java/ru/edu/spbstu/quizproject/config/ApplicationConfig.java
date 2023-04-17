@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.edu.spbstu.quizproject.dao.UserRepository;
+import ru.edu.spbstu.quizproject.user.UserRepository;
 
 @Configuration
 @RequiredArgsConstructor

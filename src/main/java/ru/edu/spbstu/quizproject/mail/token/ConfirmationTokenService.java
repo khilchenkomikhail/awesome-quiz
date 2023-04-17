@@ -3,7 +3,7 @@ package ru.edu.spbstu.quizproject.mail.token;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.edu.spbstu.quizproject.mail.EmailSender;
-import ru.edu.spbstu.quizproject.service.UserService;
+import ru.edu.spbstu.quizproject.user.UserService;
 import ru.edu.spbstu.quizproject.user.User;
 
 import java.time.LocalDateTime;
