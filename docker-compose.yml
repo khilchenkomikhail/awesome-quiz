@@ -1,0 +1,23 @@
+version: "1"
+services:
+  quiz-app:
+    container_name: quiz-app
+    image: mikhailkh/spring-boot-quiz:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+      - maildev
+
+  db:
+    container_name: quiz-db
+    image: mikhailkh/quiz-db:latest
+    ports:
+      - 5432:5432
+
+  maildev:
+    container_name: maildev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
