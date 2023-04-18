@@ -3,6 +3,9 @@ services:
   quiz-app:
     container_name: quiz-app
     image: mikhailkh/spring-boot-quiz:latest
+    deploy:
+      labels:
+        kompose.service.type: LoadBalancer
     ports:
       - 8080:8080
     depends_on:
@@ -21,3 +24,6 @@ services:
     ports:
       - 1080:1080
       - 1025:1025
+    deploy:
+      labels:
+        kompose.service.type: LoadBalancer

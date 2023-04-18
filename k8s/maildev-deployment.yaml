@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\infrustructure_progs\k8s\kompose.exe convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: maildev
+    kompose.service.type: LoadBalancer
+  name: maildev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: maildev
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\infrustructure_progs\k8s\kompose.exe convert
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/quiz-project-default: "true"
+        io.kompose.service: maildev
+    spec:
+      containers:
+        - image: maildev/maildev
+          name: maildev
+          ports:
+            - containerPort: 1080
+            - containerPort: 1025
+          resources: {}
+      restartPolicy: Always
+status: {}
